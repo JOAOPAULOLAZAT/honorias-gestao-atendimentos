@@ -135,7 +135,7 @@ HTML = """
         {% for atendimento in atendimentos %}
         <div class="registro">
             <strong>{{ atendimento.cliente }}</strong>
-            <p>Produto: {{ atendimento.produto }}</p>
+            <p>Produto: {{ atendimento.produto_interesse }}</p>
             <p class="status">
                 Situação: {{ atendimento.status }}
             </p>

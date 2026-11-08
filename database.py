@@ -70,10 +70,21 @@ def criar_tabelas():
         """)
 
 
+
 def cadastrar_cliente(nome, canal, telefone=None):
+    if not isinstance(nome, str):
+        raise ValueError("O nome deve ser um texto.")
+
+    if not isinstance(canal, str):
+        raise ValueError("O canal deve ser um texto.")
+
     nome = nome.strip()
     canal = canal.strip()
-    telefone = telefone.strip() if telefone else None
+
+    if telefone is not None:
+        if not isinstance(telefone, str):
+            raise ValueError("O telefone deve ser um texto.")
+        telefone = telefone.strip() or None
 
     if not nome:
         raise ValueError("O nome do cliente é obrigatório.")

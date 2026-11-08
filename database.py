@@ -12,6 +12,32 @@ def conectar():
     return conexao
 
 
+def atualizar_status(atendimento_id, novo_status):
+    status_validos = (
+        "Pendente",
+        "Em andamento",
+        "Concluído"
+    )
+
+    if novo_status not in status_validos:
+        raise ValueError("Status inválido.")
+
+    with conectar() as conexao:
+        cursor = conexao.execute(
+            """
+            UPDATE atendimentos
+            SET status = ?
+            WHERE id = ?
+            """,
+            (novo_status, atendimento_id)
+        )
+
+        if cursor.rowcount == 0:
+            raise ValueError("Atendimento não encontrado.")
+
+    return True
+
+
 
 def criar_tabelas():
     with conectar() as conexao:
